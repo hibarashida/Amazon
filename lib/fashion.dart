@@ -12,12 +12,10 @@ class Fashion extends StatelessWidget {
    Fashion({super.key,required this.show});
 
   @override
-  Widget build(BuildContext context) {
+    Widget build(BuildContext context) {
     providerclass amazonprovider = Provider.of<providerclass>(context);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
-
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -48,7 +46,9 @@ class Fashion extends StatelessWidget {
                             builder: (context) => const AmazonLens(),
                           ));
                     },
-                    child: const Icon(Icons.document_scanner_outlined))),
+                    child: const Icon(Icons.document_scanner_outlined)
+                )
+            ),
           ),
         ),
       ),
@@ -91,6 +91,7 @@ class Fashion extends StatelessWidget {
                      color: amazonprovider.productdetails[index].color,
                     prize: amazonprovider.productdetails[index].price,
                     discount: amazonprovider.productdetails[index].discount,
+                    productid: amazonprovider.productdetails[index].id,
                     show: show,
 
                   ),));
@@ -102,7 +103,7 @@ class Fashion extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          color: Colors.blue,
+                          // color: Colors.blue,
                           height: 230,
                           width: 190,
                           child: Image.network(

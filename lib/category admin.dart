@@ -79,6 +79,7 @@ class Category extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     amazonprovider.adddata2();
+                    amazonprovider.Clear();
                   },
                   child: Container(
                     width: 90,

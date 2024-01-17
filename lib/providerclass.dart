@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'addressmdlcls.dart';
 import 'bottomnavigationbar.dart';
 import 'cartmodelcls.dart';
 import 'listvewimgmodlcls.dart';
@@ -568,11 +569,30 @@ class providerclass extends ChangeNotifier {
 
   int selectedIndex = 0;
 
+  String shoppingAddress='';
+  String name='';
+  String housename="";
+  String areaname="";
+  String Towncity="";
+  String state="";
+  String pincode="";
+//bottomnavigation
   void onItemTapped(int index) {
     selectedIndex = index;
     notifyListeners();
   }
+  //payment
+  String checkval = "";
 
+  void card(String? val) {
+    checkval = val!;
+    notifyListeners();
+  }
+
+
+
+
+//radiobutton
   String checkvalue = "";
 
   void ordertype(String? val) {
@@ -580,12 +600,31 @@ class providerclass extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   String checkvalue2 = "";
 
   void ordertypes(String? val) {
     checkvalue = val!;
     notifyListeners();
   }
+
+  //checkbox
+  bool checkvalue3 = false;
+
+  void defaultads(bool? val) {
+    checkvalue3 = val!;
+    notifyListeners();
+  }
+  String address123 = "";
+
+  void address(val) {
+    // checkvalue4 = val!;
+    notifyListeners();
+  }
+
+
+
 
   TextEditingController namecontroller = TextEditingController();
   TextEditingController phnnocontroller = TextEditingController();
@@ -600,7 +639,8 @@ class providerclass extends ChangeNotifier {
   List<Cartdetails> addcart = [];
   List<carousel> addcarousel = [];
   List<Listviewimg> addlistviewimg=[];
-  // List<Dress>
+  List<Address> addresslist=[];
+
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<void> addData() async {
@@ -632,6 +672,7 @@ class providerclass extends ChangeNotifier {
     db.collection("details").doc(id).set(map);
     notifyListeners();
   }
+
 
   void setImage(File image) {
     fileImage = image;
@@ -673,7 +714,7 @@ class providerclass extends ChangeNotifier {
   Future<void> adddata2() async {
     String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> categorymap = HashMap();
-    categorymap["Category id"] = id;
+    categorymap["Categoryid"] = id;
     categorymap["categoryname"] = categorynamecontroller.text;
 
     if (categoryfileimg != null) {
@@ -730,7 +771,7 @@ class providerclass extends ChangeNotifier {
   Future<void> addproduct() async {
     String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> productmap = HashMap();
-    productmap["product id"] = id;
+    productmap["productid"] = id;
     productmap["product name"] = productnamecontroller.text;
     productmap["color"] = colorcontroller.text;
     productmap["price"] = pricecontroller.text;
@@ -823,10 +864,12 @@ class providerclass extends ChangeNotifier {
   }
 
   //otp
+
+
   TextEditingController otpverifycontroller = TextEditingController();
+  TextEditingController otp_verbify = TextEditingController();
 
   String VerificationId = "";
-  TextEditingController otp_verbify = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
 
   void sendotp(BuildContext context) async {
@@ -883,15 +926,16 @@ class providerclass extends ChangeNotifier {
   }
 
   void Addcart(
-      String name, color, price, discount, photo, BuildContext context) {
+      String name, color, price, discount, photo,productid, BuildContext context) {
     String id = DateTime.now().millisecondsSinceEpoch.toString();
     HashMap<String, Object> addcartmap = HashMap();
-    addcartmap["string id"] = id;
+    addcartmap["cartid"] = id;
     addcartmap["name"] = name;
     addcartmap["color"] = color;
     addcartmap["price"] = price;
     addcartmap["discount"] = discount;
     addcartmap["Photo"] = photo;
+    addcartmap["productid"] = productid;
     db.collection("cart").doc(id).set(addcartmap);
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -918,8 +962,7 @@ class providerclass extends ChangeNotifier {
               addcartmap["price"].toString(),
               addcartmap["discount"].toString()));
           notifyListeners();
-        }
-        ;
+        };
       }
       notifyListeners();
     });
@@ -927,9 +970,7 @@ class providerclass extends ChangeNotifier {
 
   void deletecart(String id) {
     print(id + "123456");
-
     db.collection("cart").doc(id).delete();
-
     notifyListeners();
   }
 
@@ -957,7 +998,6 @@ class providerclass extends ChangeNotifier {
       carouselymap['photo'] = cimg;
       // editMap['IMAGE_URL'] = imageUrl;
     }
-
     db.collection("Carousel").doc(id).set(carouselymap);
     notifyListeners();
   }
@@ -998,6 +1038,7 @@ class providerclass extends ChangeNotifier {
       }
       notifyListeners();
     });
+
   }
 
   Future<void> cropImage(String path, String from) async {
@@ -1042,10 +1083,8 @@ class providerclass extends ChangeNotifier {
   }
 
   void getproductadmindata(String cateid) {
-    db.collection("Product")
-        .where("categoryId", isEqualTo: cateid)
-        .get()
-        .then((value) {
+    // productdetails.clear();
+    db.collection("Product").where("categoryId", isEqualTo: cateid).get().then((value) {
       if (value.docs.isNotEmpty) {
         productdetails.clear();
         for (var elements in value.docs) {
@@ -1079,6 +1118,23 @@ class providerclass extends ChangeNotifier {
        notifyListeners();
 
    }
+
+   String countryname="";
+    void cntname(String name){
+      countryname=name;
+      print("hjk"+name);
+      notifyListeners();
+    }
+    String statename="Select";
+    void stname(String name){
+      statename=name;
+      notifyListeners();
+    }
+    String qty="Qty:1";
+    void qtyno(String name){
+      qty=name;
+      notifyListeners();
+    }
 //listviewimg
   Future<void> Addlistimg() async {
     String id = DateTime.now().millisecondsSinceEpoch.toString();
@@ -1139,7 +1195,80 @@ class providerclass extends ChangeNotifier {
       notifyListeners();
     });
   }
+    TextEditingController fullnamecontroller =TextEditingController();
+    TextEditingController mobilenumbnercontroller = TextEditingController();
+    TextEditingController houseadrscontroller =  TextEditingController();
+    TextEditingController areacontroller = TextEditingController();
+    TextEditingController landmarkcontroller = TextEditingController();
+    TextEditingController pincodecontroller = TextEditingController();
+    TextEditingController towncontroller = TextEditingController();
+    TextEditingController countrycontroller=TextEditingController();
+    TextEditingController statecontrooler=TextEditingController();
+
+  void addaddress(String from,addressId) {
+    if (from == "CHECKBOX") {
+
+      HashMap<String, Object> addressmap2 = HashMap();
+      addressmap2["Status"]="YES";
+      db.collection("Address").doc(addressId).update(addressmap2);
+    } else {
+      String id = DateTime.now().millisecondsSinceEpoch.toString();
+      HashMap<String, Object> addressmap = HashMap();
+      addressmap["Addressid"] = id;
+      addressmap["Full_Name"] = fullnamecontroller.text;
+      addressmap["Mobilenumber"] = mobilenumbnercontroller.text;
+      addressmap["HouseAddress"] = houseadrscontroller.text;
+      addressmap["Areaaddress"] = areacontroller.text;
+      addressmap["Landmark"] = landmarkcontroller.text;
+      addressmap["Pin_Code"] = pincodecontroller.text;
+      addressmap["Town/City"] = towncontroller.text;
+      addressmap["Country"] = countryname;
+      addressmap["State"] = statename;
+      db.collection("Address").doc(id).set(addressmap);
+    }
+  }
+  void clear(){
+    fullnamecontroller.clear();
+    mobilenumbnercontroller.clear();
+    houseadrscontroller.clear();
+    areacontroller.clear();
+    landmarkcontroller.clear();
+    pincodecontroller.clear();
+    towncontroller.clear();
+  }
+
+
+  void getaddress(){
+    db.collection("Address").get().then((value){
+        if (value.docs.isNotEmpty) {
+          addresslist.clear();
+          for (var element in value.docs) {
+            Map<dynamic, dynamic> addressmap = element.data();
+            addresslist.add(Address(
+                addressmap["Addressid"].toString(),
+                addressmap["Full_Name"].toString(),
+                addressmap["Areaaddress"].toString(),
+                addressmap["HouseAddress"].toString(),
+                addressmap["Landmark"].toString(),
+                addressmap["Mobilenumber"].toString(),
+                addressmap["Pin_Code"].toString(),
+                addressmap["Town/City"].toString(),
+                addressmap["Country"].toString(),
+                addressmap["State"].toString()
+                 ,
+            ));
+            notifyListeners();
+          }
+        }
+        notifyListeners();
+    });
+  }
 
 
 
-}
+
+  }
+
+
+
+

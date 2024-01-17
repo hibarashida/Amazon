@@ -18,15 +18,15 @@ class AmazonLens extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding:EdgeInsets.only(left: 10,bottom: 10),
+                padding:const EdgeInsets.only(left: 10,bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(onTap: () {
                       Navigator.pop(context);
                     },
-                        child: Icon(Icons.arrow_back)),
-                    SizedBox(
+                        child: const Icon(Icons.arrow_back)),
+                    const SizedBox(
                       // width: ,
                         child: Row(
                           children: [
@@ -35,7 +35,7 @@ class AmazonLens extends StatelessWidget {
                             Text(" lens ",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal),)
                           ],
                         )),
-                           Padding(
+                           const Padding(
                              padding:  EdgeInsets.only(right: 10),
                              child: Stack(
                                children:[ CircleAvatar(
@@ -56,18 +56,18 @@ class AmazonLens extends StatelessWidget {
                 height: 3,
                 color: Colors.black12,
               ),
-              Padding(
+              const Padding(
                 padding:EdgeInsets.only(right: 120,top: 14,bottom: 10),
                 child: Text("Find the look from your photos",style: TextStyle(fontSize: 18,
                     fontWeight:FontWeight.bold ),),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 height: 40,
                 width:width,
                 decoration: BoxDecoration( color: Colors.orangeAccent,borderRadius: BorderRadius.circular(5)),
-                child: Center(child: Text("Upload a photos")),
-              ),SizedBox(
+                child: const Center(child: Text("Upload a photos")),
+              ),const SizedBox(
                 height: 15,
               ),
               Container(
@@ -75,14 +75,15 @@ class AmazonLens extends StatelessWidget {
                 height: 3,
                 color: Colors.black12,
               ),
-              Padding(
+              const Padding(
                 padding:  EdgeInsets.only(right: 180,top: 10,bottom: 7),
-                child: Text("Explore thses looks",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                child: Text("Explore thses looks",
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
               ),
               Container(
                 width:width,
                 height: 50,
-                child: TabBar(
+                child: const TabBar(
                   labelStyle: TextStyle(fontWeight: FontWeight.bold),
                   indicatorColor: Colors.black,
                   labelColor: Colors.black,
@@ -104,18 +105,17 @@ class AmazonLens extends StatelessWidget {
                         children: [
                           Container(
                             height: 50,
-
-
                             child: Row(
                               children: [
                                 CircleAvatar(
                                   radius: 20,
                                   backgroundImage:AssetImage(amazonlensprovider.alltabp[index]),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(amazonlensprovider.alltext[index],style: TextStyle(fontWeight: FontWeight.bold),)
+                                Text(amazonlensprovider.alltext[index],
+                                  style: const TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
                           ),
@@ -141,10 +141,11 @@ class AmazonLens extends StatelessWidget {
                                   radius: 20,
                                   backgroundImage:AssetImage(amazonlensprovider.womenimgp[index]),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(amazonlensprovider.womentext[index],style: TextStyle(fontWeight: FontWeight.bold),)
+                                Text(amazonlensprovider.womentext[index],
+                                  style: const TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
                           ),
@@ -172,10 +173,11 @@ class AmazonLens extends StatelessWidget {
                                   radius: 20,
                                   backgroundImage:AssetImage(amazonlensprovider.menimgp[index]),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(amazonlensprovider.mentext[index],style: TextStyle(fontWeight: FontWeight.bold),)
+                                Text(amazonlensprovider.mentext[index],
+                                  style: const TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
                           ),
@@ -203,10 +205,11 @@ class AmazonLens extends StatelessWidget {
                                   radius: 20,
                                   backgroundImage:AssetImage(amazonlensprovider.homeimgp[index]),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(amazonlensprovider.hometext[index],style: TextStyle(fontWeight: FontWeight.bold),)
+                                Text(amazonlensprovider.hometext[index],
+                                  style: const TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
                           ),

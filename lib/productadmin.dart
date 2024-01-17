@@ -45,7 +45,7 @@ class Product extends StatelessWidget {
                             color: Colors.teal),
                       ),
                       SizedBox(
-                        width: 320,
+                        width: 290,
                         height: 35,
                         child: TextField(
                             controller: amazonprovider.productnamecontroller,
@@ -117,7 +117,7 @@ class Product extends StatelessWidget {
                             color: Colors.teal),
                       ),
                       SizedBox(
-                        width: 320,
+                        width: 290,
                         height: 35,
                         child: TextField(
                             controller: amazonprovider.colorcontroller,
@@ -139,7 +139,7 @@ class Product extends StatelessWidget {
                             color: Colors.teal),
                       ),
                       SizedBox(
-                        width: 320,
+                        width: 290,
                         height: 35,
                         child: TextField(
                             controller: amazonprovider.pricecontroller,
@@ -161,7 +161,7 @@ class Product extends StatelessWidget {
                             color: Colors.teal),
                       ),
                       SizedBox(
-                        width: 300,
+                        width: 250,
                         height: 35,
                         child: TextField(
                             controller: amazonprovider.discountcontroller,
@@ -328,7 +328,9 @@ class Product extends StatelessWidget {
                     ),
                   )
                 ],
-              )),
-        ));
-  }
+              )
+           ),
+        )
+     );
+   }
 }

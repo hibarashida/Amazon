@@ -25,7 +25,7 @@ class ProfilePage extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 260),
+                padding: const EdgeInsets.only(right: 200),
                 child: Image.asset("assets/amazon.inlogo.png", scale: 4),
               ),
               const Icon(Icons.doorbell_outlined),
@@ -58,7 +58,7 @@ class ProfilePage extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
                   Padding(
-                    padding: EdgeInsets.only(left: 230),
+                    padding: EdgeInsets.only(left: 200),
                     child: CircleAvatar(
                       radius: 20,
                       backgroundImage: AssetImage("assets/personicon.png"),
@@ -343,10 +343,11 @@ class ProfilePage extends StatelessWidget {
                         child: Text(amazonprovider.account[index],
                             style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
+
                       ),
                     );
                   }),
-            ),
+                ),
             Container(
               margin: const EdgeInsets.only(top: 10, bottom: 50),
               width: width,

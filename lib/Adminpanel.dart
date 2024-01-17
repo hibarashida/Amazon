@@ -39,7 +39,7 @@ class Adminpanel extends StatelessWidget {
                   SizedBox(
                     width: 200,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.teal),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -53,7 +53,7 @@ class Adminpanel extends StatelessWidget {
                   SizedBox(
                     width: 200,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.teal),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -66,7 +66,7 @@ class Adminpanel extends StatelessWidget {
                   ),  SizedBox(
                     width: 200,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.teal),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -80,7 +80,7 @@ class Adminpanel extends StatelessWidget {
                   SizedBox(
                     width: 200,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.teal),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
                         onPressed: () {
                           amazonprovider.getcategorydata();
                           Navigator.push(

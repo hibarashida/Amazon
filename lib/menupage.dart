@@ -118,6 +118,7 @@ class MenuPage extends StatelessWidget {
       ),
       backgroundColor: Colors.teal.shade100,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal.shade200,
         title: Container(
           width: width,

@@ -1,10 +1,13 @@
 import 'package:amazon/providerclass.dart';
+import 'package:amazon/selectpayament.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'Amazonlens.dart';
+import 'Shippingaddress.dart';
+import 'delivaryadress.dart';
 
 class Dress extends StatelessWidget {
 
@@ -14,8 +17,10 @@ class Dress extends StatelessWidget {
   String color;
   String prize;
   String discount;
+  String productid;
   bool show;
-  Dress({super.key,required this.photo,required this.name,required this.color,required this.prize,required this.discount,required this.show});
+  Dress({super.key,required this.photo,required this.name,required this.color,
+    required this.prize,required this.discount,required this.productid,required this.show});
 
   int Activeindex = 0;
   int productlength = 0;
@@ -27,6 +32,7 @@ class Dress extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+
       appBar: AppBar(
         leading: InkWell(
             onTap: () {
@@ -390,7 +396,7 @@ class Dress extends StatelessWidget {
               padding: EdgeInsets.only(left: 10, top: 8),
               child: Row(
                 children: [
-                  Text("$discount%",
+                  Text(discount,
                       style: TextStyle(color: Colors.red, fontSize: 30)),
                   SizedBox(
                     width: 10,
@@ -505,150 +511,199 @@ class Dress extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(right: 310, bottom: 10),
+              padding: EdgeInsets.only(right: 290, bottom: 10),
               child: Text(
                 "In stock",
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
               ),
             ),
-            InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (ctx) => Dialog(
-                    child: Container(
-                      height: 300,
-                      width: 50,
-                      child: Column(
-                        children: [
-                          const Text("1"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("2"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("3"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("4"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("5"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("6"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("7"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("8"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("9"),
-                          Container(
-                            // width: width,
-                            height: 1,
-                            color: Colors.black12,
-                          ),
-                          const Text("10"),
-                        ],
-                      ),
-                    ),
-                    // contentPadding: EdgeInsets.zero,
-                    //   title: const Text("Qty:"),
-                    insetPadding: const EdgeInsets.all(10),
 
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
+            Consumer<providerclass>(
+                builder: (context,value4,child)  {
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            titlePadding:  EdgeInsets.only(left: 240,top: 10),
+                            title:  InkWell(onTap: () {
+                              Navigator.pop(context);
+                            },
+                                child: Icon(Icons.close)),
+                            content:  SingleChildScrollView(
+                              child:  Column(
+                                children: [
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
 
-                    // actions: [
-                    //   const Text("1"),
-                    //       const Text("2"),
-                    //       const Text("3"),
-                    //       const Text("4"),
-                    //       const Text("5"),
-                    //       const Text("6"),
-                    //       const Text("7"),
-                    //       const Text("8"),
-                    //       const Text("9"),
-                    //       const Text("10"),
-                    // ],
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(right: 280, bottom: 20),
-                height: 30,
-                width: 100,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 2, color: Colors.black26)),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Qty: 1"),
-                    Icon(Icons.keyboard_arrow_down_outlined)
-                  ],
-                ),
-              ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("1");
+                                      },
+                                      child: Text("1")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("2");
+                                      },
+                                      child: Text("2")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("3");
+                                      },
+                                      child: Text("3")),
+
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("4");
+                                      },
+                                      child: Text("4")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("5");
+                                      },
+                                      child: Text("5")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("6");
+                                      },
+                                      child: Text("6")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("7");
+                                      },
+                                      child: Text("7")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        value4.qtyno("8");
+                                      },
+                                      child: Text("8")),
+                                  Divider(
+                                    color: Colors.black12,
+                                    thickness: 1,
+                                  ),
+
+
+                                ],),
+                            ),
+
+                          )
+                      );
+                    },
+                    child:Consumer<providerclass>(
+                        builder: (context,value,child)  {
+                          return Container(
+                              margin: EdgeInsets.only(
+                                 right: 230,
+                                bottom: 5
+                              ),
+                              height: 40,
+                              width:100,
+                              decoration: BoxDecoration(color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(width: 1,color: Colors.black12)),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(amazonprovider.qty),
+                                  Icon( Icons.keyboard_arrow_down_outlined)
+                                ],
+
+                              )
+                          );
+                        }
+                    ),
+                  );
+                }
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              height: 40,
-              width: width,
-              decoration: BoxDecoration(
-                  color: Colors.amber, borderRadius: BorderRadius.circular(20)),
-              child: const Center(
-                  child: Text("Add to Cart",
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold))),
+
+            InkWell(onTap: () {
+            amazonprovider.Addcart(
+              name,color,prize,discount,photo,productid,context
+            );
+            },
+
+
+              child: Container(
+                margin:  EdgeInsets.symmetric(horizontal: 15),
+                height: 40,
+                width: width,
+                decoration: BoxDecoration(
+                    color: Colors.amber, borderRadius: BorderRadius.circular(20)),
+                child: const Center(
+                    child: Text("Add to Cart",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold
+                        ))),
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              height: 40,
-              width: width,
-              decoration: BoxDecoration(
-                  color: Colors.orange.shade700,
-                  borderRadius: BorderRadius.circular(20)),
-              child: const Center(
-                  child: Text("Buy Now",
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold))),
+            InkWell(onTap: () {
+              Navigator.push(context,MaterialPageRoute(builder:(context) => Delivaryaddress(
+                photo: photo,
+                productid: productid,
+                color: color,
+                discount: discount,
+                prize: prize,
+                name: name,
+                qty: amazonprovider.qty,
+              ),));
+            },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                height: 40,
+                width: width,
+                decoration: BoxDecoration(
+                    color: Colors.orange.shade700,
+                    borderRadius: BorderRadius.circular(20)),
+                child: const Center(
+                    child: Text("Buy Now",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold))),
+              ),
             ),
             const SizedBox(
               height: 20,
-            )
+            ),
+
           ],
         ),
       ),

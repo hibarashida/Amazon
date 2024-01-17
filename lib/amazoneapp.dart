@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+
 import 'Dress.dart';
 import 'amazoneapp.dart';
 import 'amazoneapp.dart';
@@ -16,6 +17,7 @@ import 'amazoneapp.dart';
 import 'amazonsigninpage.dart';
 import 'bottomnavigationbar.dart';
 import 'fashion.dart';
+
 
 class Amazonapp extends StatelessWidget {
    Amazonapp({super.key});
@@ -32,6 +34,8 @@ class Amazonapp extends StatelessWidget {
      "assets/tg.jpg",
      "assets/allcategory.jpg"
    ];
+
+
    List <String> text2 =[
      "Mobile accessories | \n Starting ₹99",
      "Beauty & makeup |\n Starting  ₹99",
@@ -55,9 +59,9 @@ class Amazonapp extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(leading: InkWell(onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Amazon(),));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Amazon(),));
       },
-          child: Icon(Icons.arrow_back)),
+          child: const Icon(Icons.arrow_back)),
         backgroundColor: Colors.teal.shade200,
         title: Container(
           width: width,
@@ -65,14 +69,14 @@ class Amazonapp extends StatelessWidget {
           decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.white,),
            child: TextField(
              decoration: InputDecoration(
-               prefixIcon: Icon(Icons.search),
-               border: OutlineInputBorder(),
-               contentPadding: EdgeInsets.only(top:4 ),
-               hintText: 'Search Amazon.in',hintStyle:TextStyle(fontSize: 17) ,
+               prefixIcon: const Icon(Icons.search),
+               border: const OutlineInputBorder(),
+               contentPadding: const EdgeInsets.only(top:4 ),
+               hintText: 'Search Amazon.in',hintStyle:const TextStyle(fontSize: 17) ,
                suffixIcon: InkWell(onTap: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => AmazonLens(),));
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => const AmazonLens(),));
                },
-                   child: Icon(Icons.document_scanner_outlined))
+                   child: const Icon(Icons.document_scanner_outlined))
              ),
            ),
         ),
@@ -85,7 +89,7 @@ class Amazonapp extends StatelessWidget {
               width: width,
               height: 40,
               color: Colors.teal.shade100,
-              child:  Row(
+              child:  const Row(
                 children: [
                   Icon(Icons.location_on_outlined),
                   SizedBox(width: 10,),
@@ -97,32 +101,39 @@ class Amazonapp extends StatelessWidget {
               height: 100,
 
               child:
-               ListView.builder(
+               Consumer<providerclass>(
+                 builder: (context,val,child) {
+                   return ListView.builder(
 
-                 itemCount: amazonprovider.categoryimg.length,
-                 scrollDirection: Axis.horizontal,
-                 itemBuilder:(context, index) {
-                return InkWell(
-                  onTap: () {
-                    amazonprovider.getproductadmindata(amazonprovider.categoryimg[index].id);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Fashion(
-                      show: amazonprovider.categoryimg[index].id=="1690616231973"?true:false,
+                     itemCount: val.categoryimg.length,
+                     scrollDirection: Axis.horizontal,
+                     itemBuilder:(context, index) {
+                    return InkWell(
+                      onTap: () {
+                        val.getproductadmindata(val.categoryimg[index].id.toString());
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Fashion(
+                          show:
+                          val.categoryimg[index].id=="1690616231973"?true:
+                          false,
 
-                    ),));
+                        ),)
+                        );
+                      },
+                      child: Column(
+                        children: [
+                       Container(
+                         // width: width,
+                         height: 70,
+                         color: Colors.black,
+                          child:  Image.network(val.categoryimg[index].image.toString()),
+                       ),
+                          Text(val.categoryimg[index].name),
+                        ],
+                      ),
+                    );
                   },
-                  child: Column(
-                    children: [
-                   Container(
-                     // width: width,
-                     height: 70,
-                     color: Colors.black,
-                      child:  Image.network(amazonprovider.categoryimg[index].image.toString()),
-                   ),
-                      Text(amazonprovider.categoryimg[index].name),
-                    ],
-                  ),
-                );
-              },
+                   );
+                 }
                ),
             ),
             Consumer<providerclass>(
@@ -132,37 +143,34 @@ class Amazonapp extends StatelessWidget {
                    color: Colors.black12,
                   child: Stack(
                     children: [
-                      Container(
-                         // color: Colors.red,
-                        child: CarouselSlider.builder(
-                          itemCount: value.addcarousel.length,
-                          itemBuilder: (context, index, realIndex) {
-                            final image = value.addcarousel[index].image;
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: ClipRRect(
-                                child: Image.network(
-                                  image,
-                                  fit: BoxFit.fill,
-                                ),
+                      CarouselSlider.builder(
+                        itemCount: value.addcarousel.length,
+                        itemBuilder: (context, index, realIndex) {
+                          final image = value.addcarousel[index].image;
+                          return SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: ClipRRect(
+                              child: Image.network(
+                                image,
+                                fit: BoxFit.fill,
                               ),
-                            );
-                          },
-                          options: CarouselOptions(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              height: 210,
-                              viewportFraction: 1,
-                              autoPlay: true,
-                              pageSnapping: true,
-                              enlargeStrategy: CenterPageEnlargeStrategy.height,
-                              enlargeCenterPage: true,
-                              autoPlayInterval: const Duration(seconds: 4),
-                              onPageChanged: (index, reason) {
-                               value.activeIndex(index);
-                                // print("activvgvg"+Activeindex.toString());
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            height: 210,
+                            viewportFraction: 1,
+                            autoPlay: true,
+                            pageSnapping: true,
+                            enlargeStrategy: CenterPageEnlargeStrategy.height,
+                            enlargeCenterPage: true,
+                            autoPlayInterval: const Duration(seconds: 4),
+                            onPageChanged: (index, reason) {
+                             value.activeIndex(index);
+                              // print("activvgvg"+Activeindex.toString());
 
-                              }),
-                        ),
+                            }),
                       ),
                       Positioned( top: 140,
                         left: 150,
@@ -178,7 +186,7 @@ class Amazonapp extends StatelessWidget {
                                scrollDirection: Axis.horizontal,
                                itemBuilder:(context,index){
                                 return Container(
-                                  margin: EdgeInsets.only(right: 5),
+                                  margin: const EdgeInsets.only(right: 5),
                                    height: 150,
                                    width: 150,
                                   child: ClipRRect(
@@ -189,41 +197,41 @@ class Amazonapp extends StatelessWidget {
                          ),
                        ),
                       Container(
-                        margin: EdgeInsets.only(top: 315),
+                        margin: const EdgeInsets.only(top: 315),
                         height: 50,
                         width: width,
                         color: Colors.white,
                         child: Row(
                           children: [
-                            SizedBox(
+                             SizedBox(
                               width: 20,
                             ),
                             CircleAvatar(backgroundColor: Colors.deepOrange ,radius: 15,
                                 child: Image.asset("assets/pay.png",scale: 5)),
                             InkWell(onTap: () {
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) =>BottomNav() ,));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>const BottomNav() ,));
                             },
-                                child: Text(" PAY ON \n DELIVARY",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color:Colors.black ))),
-                            SizedBox(
+                                child: const Text(" PAY ON \n DELIVARY",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color:Colors.black ))),
+                            const SizedBox(
                               width: 20,
                             ),
                             CircleAvatar(backgroundColor: Colors.deepOrange ,radius: 15,
                                 child: Image.asset("assets/return.png",scale: 5)),
                             InkWell(onTap:() {
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNav(),));
                             },
-                                child: Text(" EASY \n RETURN",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold))),
-                            SizedBox(
+                                child: const Text(" EASY \n RETURN",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold))),
+                            const SizedBox(
                                 width: 20),
                             CircleAvatar(backgroundColor: Colors.deepOrange ,radius: 15,
                                 child: Image.asset("assets/delivary.png",scale: 5)),
                             InkWell(onTap: () {
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNav(),));
                             },
-                                child: Text("  FREE DELIVARY \n  ON FIRST ORDER",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold))),
+                                child: const Text("  FREE DELIVARY \n  ON FIRST ORDER",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold))),
                           ],
                         ),
                       )
@@ -235,10 +243,10 @@ class Amazonapp extends StatelessWidget {
            Container(
              height:250,
              width: width,
-             decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/movie.jpg",),fit: BoxFit.fill),
+             decoration: const BoxDecoration(image: DecorationImage(image: AssetImage("assets/movie.jpg",),fit: BoxFit.fill),
                border: Border.symmetric(horizontal: BorderSide(color: Colors.black12)),
              ),
-             child: Icon( Icons.play_circle_outline_sharp),
+             child: const Icon( Icons.play_circle_outline_sharp),
            ),
 
             Container(
@@ -247,8 +255,8 @@ class Amazonapp extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Watch for FREE",style: TextStyle(fontSize:20,fontWeight: FontWeight.bold,)),
-                    SizedBox(width: 8,),
+                    const Text("Watch for FREE",style: TextStyle(fontSize:20,fontWeight: FontWeight.bold,)),
+                    const SizedBox(width: 8,),
                     Container(height: 25,color: Colors.black,width: 2,),
                     Image.asset("assets/minitv.jpg")
                   ],
@@ -267,7 +275,7 @@ class Amazonapp extends StatelessWidget {
                   // color: Colors.red,
                   child: Column(
                     children: [
-                      Text("Starting ₹166 | Deals on fashion,beauty,kitchen & more ",style:TextStyle(
+                      const Text("Starting ₹166 | Deals on fashion,beauty,kitchen & more ",style:TextStyle(
                         fontSize: 20,fontWeight: FontWeight.bold
                       ) ),
                       value2.dealsImage !=""? SizedBox(
@@ -283,14 +291,14 @@ class Amazonapp extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                    InkWell (onTap: () {
                      value2.dealsSelection("assets/img4,1.jpg");
                    },
                       child: Container(
                         height:90,
                         width: 80,
-                        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/img4,1.jpg"),),border: Border.all(color:Colors.black12,width: 2 ),
+                        decoration: BoxDecoration(image: const DecorationImage(image: AssetImage("assets/img4,1.jpg"),),border: Border.all(color:Colors.black12,width: 2 ),
                              ),
                       ),
                     ),
@@ -300,7 +308,7 @@ class Amazonapp extends StatelessWidget {
                       child: Container(
                         height: 90,
                         width: 80,
-                         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/img4,2.jpg"),),
+                         decoration: BoxDecoration(image: const DecorationImage(image: AssetImage("assets/img4,2.jpg"),),
                            border: Border.all(color:Colors.black12,width: 2)),
                       ),
                     ),
@@ -310,7 +318,7 @@ class Amazonapp extends StatelessWidget {
                       child: Container(
                         height: 90,
                         width: 80,
-                         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/img4,3.jpg"),), border: Border.all(color:Colors.black12,width: 2)
+                         decoration: BoxDecoration(image: const DecorationImage(image: AssetImage("assets/img4,3.jpg"),), border: Border.all(color:Colors.black12,width: 2)
                             ),
                       ),
                     ),
@@ -320,16 +328,16 @@ class Amazonapp extends StatelessWidget {
                       child: Container(
                         height: 90,
                         width: 80,
-                         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/img4,4.jpg"),),
+                         decoration: BoxDecoration(image: const DecorationImage(image: AssetImage("assets/img4,4.jpg"),),
                              border: Border.all(color:Colors.black12,width: 2)),
                       ),
                     ),
-                    SizedBox(width: 10,)
+                    const SizedBox(width: 10,)
                   ],
                 );
               }
             ),
-            Padding(
+            const Padding(
               padding:  EdgeInsets.only(right: 220,top: 10),
               child: Text("see all deals",style: TextStyle(color: Colors.teal,fontSize: 18,fontWeight: FontWeight.normal),),
             ),
@@ -338,7 +346,7 @@ class Amazonapp extends StatelessWidget {
               height: 2,
               color: Colors.black12,
             ),
-            Text("Tops styles for you | western dress",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
+            const Text("Tops styles for you | western dress",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),
             Column(
               children: [
                 Container(
@@ -352,8 +360,9 @@ class Amazonapp extends StatelessWidget {
                           height: 450,
                           width: width,
                             child: Padding(
-                              padding:  EdgeInsets.all(15),
+                              padding:  const EdgeInsets.all(15),
                               child: InkWell(onTap: () {
+
                                  amazonprovider.getproductadmindata("1690616231973");
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Fashion(
                                   show: true,
@@ -365,12 +374,12 @@ class Amazonapp extends StatelessWidget {
                             )),
                         Row(mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Stylish",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-                            SizedBox(width: 10,),
+                            const Text("Stylish",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                            const SizedBox(width: 10,),
                             Container(height: 25,width: 2,color: Colors.black,),
-                             SizedBox(width: 10,),
+                             const SizedBox(width: 10,),
                              Image.asset("assets/amazonlogo.jpg",scale: 6,),
-                            Text("specials",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                            const Text("specials",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ],
@@ -385,19 +394,21 @@ class Amazonapp extends StatelessWidget {
               width: width,
               color: Colors.black26,
             ),
-            Container(margin: EdgeInsets.only(left: 10,top: 10),
+            Container(margin: const EdgeInsets.only(left: 10,top: 10),
               // height:500,
+
+
               width: width,
               color: Colors.white,
                 child: Column(
                   children: [
-                    Text("Deals for yor",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    const Text("Deals for yor",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                 SizedBox(
                   height: 700,
                   child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: amazonprovider.categoryimg.length,
-                    gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1/.75,
                         crossAxisSpacing: 5.0,
@@ -434,7 +445,7 @@ class Amazonapp extends StatelessWidget {
                   ],
                 )
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             )
 
@@ -449,11 +460,11 @@ class Amazonapp extends StatelessWidget {
      // print(activeIndex.toString()+"dpddoopf");
      return Center(
        child: Padding(
-         padding:   EdgeInsets.only(top: 6),
+         padding:   const EdgeInsets.only(top: 6),
          child: AnimatedSmoothIndicator(
            activeIndex: activeindex,
            count: count,
-           effect:  JumpingDotEffect(dotWidth: 7, dotHeight: 7,
+           effect:  const JumpingDotEffect(dotWidth: 7, dotHeight: 7,
                activeDotColor: Colors.teal, dotColor: Color(0xffaba17c)),
          ),
        ),

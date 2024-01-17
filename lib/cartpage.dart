@@ -9,7 +9,6 @@ import 'cartmodelcls.dart';
 import 'cartmodelcls.dart';
 import 'cartmodelcls.dart';
 import 'cartmodelcls.dart';
-import 'cartmodelcls.dart';
 
 class CartPage extends StatelessWidget {
    CartPage({super.key});
@@ -26,11 +25,14 @@ class CartPage extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(backgroundColor: Colors.black12,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+
         backgroundColor: Colors.teal.shade200,
         title: Container(
           width: width,
           height:40 ,
-          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.white,),
+          decoration: BoxDecoration(borderRadius:BorderRadius.circular(5),
+            color: Colors.white,),
           child: TextField(
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
@@ -75,7 +77,8 @@ class CartPage extends StatelessWidget {
                     children: [
                       Icon(Icons.location_on_outlined),
                       SizedBox(width: 10,),
-                      Text("Select a location to see product availbility",style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),)
+                      Text("Select a location to see product availbility",
+                        style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),)
                     ],
                   ),
                 ),
@@ -119,16 +122,16 @@ class CartPage extends StatelessWidget {
                   color: Colors.black12,
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 350,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     // physics: const NeverScrollableScrollPhysics(),
                     itemCount: amazonprovider.addcart.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(bottom: 10,top: 10,
                             left: 10,right: 10),
-                        height: 400,
+                        height: 300,
                         width: width,
                         decoration: BoxDecoration(color: Colors.yellow,borderRadius: BorderRadius.circular(10),
                          ),
@@ -165,9 +168,9 @@ class CartPage extends StatelessWidget {
                                         Icon(Icons.star,color: Colors.deepOrange,size:18,),
                                         Icon(Icons.star,color: Colors.black12,size:18,),
                                         SizedBox(width: 80),
-                                    Icon(Icons.arrow_forward_ios,color: Colors.black38)
+                                        Icon(Icons.arrow_forward_ios,color: Colors.black38)
 
-                                                                                            ],),
+                                      ],),
                                     // Container(
                                     //   margin: EdgeInsets.only(top: 15),
                                     //   width: 190,
@@ -192,7 +195,10 @@ class CartPage extends StatelessWidget {
                                       // margin: EdgeInsets.only(right: 100,top: 10,left: 10),
                                       height: 30,
                                       width: 110,
-                                      decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.black12,
+
+                                      decoration: BoxDecoration(color: Colors.white
+                                          ,borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(width: 1,color: Colors.black12,
                                       )
                                       ),
                                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,7 +209,8 @@ class CartPage extends StatelessWidget {
                                             child: Container(
                                              width: 30,
                                               height: 40,
-                                              decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius:BorderRadius.only(bottomLeft: Radius.circular(10),
+                                              decoration: BoxDecoration(color: Colors.grey.shade300,
+                                                  borderRadius:BorderRadius.only(bottomLeft: Radius.circular(10),
                                                   topLeft:Radius.circular(10) ) ),
                                               child: Center(child: Text("-",style: TextStyle(fontWeight: FontWeight.bold))),
                                             ),
@@ -217,7 +224,8 @@ class CartPage extends StatelessWidget {
                                               // margin: EdgeInsets.only(left: 19),
                                               width: 30,
                                               height: 40,
-                                              decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius:BorderRadius.only(bottomRight: Radius.circular(10),
+                                              decoration: BoxDecoration(color: Colors.grey.shade300,
+                                                  borderRadius:BorderRadius.only(bottomRight: Radius.circular(10),
                                                   topRight:Radius.circular(10) ) ),
                                               child: Center(child: Text("+",style: TextStyle(fontWeight: FontWeight.bold),)),
                                             ),
@@ -271,13 +279,15 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 15,right: 15,bottom: 15,top: 20),
+                  margin: EdgeInsets.only(left: 15,right: 15
+                      ,bottom: 15,top: 20),
                   color: Colors.white,
                   width: 480,
                   height: 300,
                   child: Column(
                     children: [
-                      Text("Customer who bought items in your \n Recent History also bought",style: TextStyle(
+                      Text("Customer who bought items in your \n Recent History also bought",
+                          style: TextStyle(
                         fontSize: 20,fontWeight: FontWeight.bold
                       )),
                       SizedBox(width: width,
@@ -299,7 +309,8 @@ class CartPage extends StatelessWidget {
                                       color: Colors.white,
                                       child:   Image.network(amazonprovider.productdetails[index].photo),
                                     ),
-                                    Text(amazonprovider.productdetails[index].product_name,maxLines: 2,style: TextStyle(overflow: TextOverflow.ellipsis,
+                                    Text(amazonprovider.productdetails[index].product_name,
+                                        maxLines: 2,style: TextStyle(overflow: TextOverflow.ellipsis,
                                       color: Colors.black,fontWeight: FontWeight.bold
                                     )),
                                     Text(amazonprovider.productdetails[index].color,style: TextStyle(
@@ -328,6 +339,7 @@ class CartPage extends StatelessWidget {
                                           amazonprovider.productdetails[index].price,
                                           amazonprovider.productdetails[index].discount,
                                           amazonprovider.productdetails[index].photo,
+                                        amazonprovider.productdetails[index].id,
                                         context
                                       );
                                       amazonprovider.getcartdata();
@@ -337,7 +349,8 @@ class CartPage extends StatelessWidget {
                                         width: 90,
                                         height: 30,
                                         decoration: BoxDecoration(color: Colors.yellow,borderRadius: BorderRadius.circular(5)),
-                                        child: Center(child: Text("Add to cart",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))),
+                                        child: Center(child: Text("Add to cart",
+                                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))),
                                       ),
                                     )
                                   ],
@@ -379,7 +392,8 @@ class CartPage extends StatelessWidget {
                                       color: Colors.white,
                                       child:   Image.network(amazonprovider.productdetails[index].photo),
                                     ),
-                                    Text(amazonprovider.productdetails[index].product_name,maxLines: 2,style: TextStyle(overflow: TextOverflow.ellipsis,
+                                    Text(amazonprovider.productdetails[index].product_name,maxLines: 2,
+                                        style: TextStyle(overflow: TextOverflow.ellipsis,
                                         color: Colors.black,fontWeight: FontWeight.bold
                                     )),
                                     Text(amazonprovider.productdetails[index].color,style: TextStyle(
@@ -407,16 +421,17 @@ class CartPage extends StatelessWidget {
                                           amazonprovider.productdetails[index].price,
                                           amazonprovider.productdetails[index].discount,
                                           amazonprovider.productdetails[index].photo,
+                                          amazonprovider.productdetails[index].id,
                                           context
                                       );
                                       amazonprovider.getcartdata();
-
-                                    },
+                                      },
                                       child: Container(
                                         width: 90,
                                         height: 30,
                                         decoration: BoxDecoration(color: Colors.yellow,borderRadius: BorderRadius.circular(5)),
-                                        child: Center(child: Text("Add to cart",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))),
+                                        child: Center(child: Text("Add to cart",
+                                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15))),
                                       ),
                                     )
                                   ],
@@ -442,8 +457,9 @@ class CartPage extends StatelessWidget {
                         Container(margin: EdgeInsets.only(top: 9),
                           height: 50,
                           width: 380,
-                         decoration: BoxDecoration( color: Colors.yellowAccent,borderRadius: BorderRadius.circular(10)),
-                          child: Center(child: Text("Continue shopping",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color:Colors.black))),
+                         decoration: BoxDecoration(color: Colors.yellowAccent,borderRadius: BorderRadius.circular(10)),
+                          child: Center(child: Text("Continue shopping",
+                              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color:Colors.black))),
                         ),
                       ],
                     ),

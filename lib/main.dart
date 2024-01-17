@@ -1,6 +1,7 @@
 import 'package:amazon/productadmin.dart';
 import 'package:amazon/profiepage.dart';
 import 'package:amazon/providerclass.dart';
+import 'package:amazon/sample.dart';
 import 'package:amazon/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,15 @@ import 'Adminpanel.dart';
 import 'Amazonlens.dart';
 import 'Carouseladmin.dart';
 import 'Customerservice.dart';
+import 'Shippingaddress.dart';
 import 'Sign-in.dart';
+import 'SplashScrren.dart';
 import 'amazoneapp.dart';
 import 'amazonsigninpage.dart';
 import 'bottomnavigationbar.dart';
 import 'cartpage.dart';
 import 'category admin.dart';
+import 'delivaryadress.dart';
 import 'fashion.dart';
 import 'loginpage.dart';
 import 'otplogin.dart';
@@ -43,13 +47,14 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-          home: SplashScreen(),
+           // home: SplashScreen(),
         // home: Otplogin() ,
         // home: LoginPage() ,
         //   home: Adminpanel() ,
         //  home: Product() ,
-        // home: Carousel() ,
-        //    home: Fashion() ,
+        // home: Delivaryaddress() ,
+        home: SplashScrren(),
+
         //   home: Amazon() ,
       ),
     );
